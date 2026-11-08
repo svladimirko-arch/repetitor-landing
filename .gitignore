@@ -1,0 +1,11 @@
+# зависимости
+node_modules/
+
+# сборка (публикуется отдельной веткой gh-pages)
+dist/
+
+# системное
+.DS_Store
+Thumbs.db
+*.log
+test_dir/

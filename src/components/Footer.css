@@ -1,0 +1,198 @@
+.footer {
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.72);
+  padding: clamp(44px, 6vw, 68px) 0 26px;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.logo--footer {
+  color: #fff;
+}
+
+.footer__brand p {
+  margin-top: 14px;
+  font-size: 14.5px;
+  max-width: 34ch;
+}
+
+.footer__teacher {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13.5px;
+}
+
+.footer__nav,
+.footer__contacts {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.footer__nav b,
+.footer__contacts b {
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.footer__nav a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 14.5px;
+  width: fit-content;
+  transition: color 0.2s ease;
+}
+
+.footer__nav a:hover {
+  color: #fff;
+}
+
+.footer__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 19px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__phone:hover {
+  color: #5eead4;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.footer__socials a {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.footer__socials a:hover {
+  background: var(--grad-primary);
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.footer__note {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.footer__bottom {
+  margin-top: clamp(30px, 4vw, 44px);
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+}
+
+.footer__bottom-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer__privacy {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13.5px;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer__privacy:hover {
+  color: #fff;
+}
+
+.footer__demo {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 12.5px;
+}
+
+/* Модальное окно политики */
+.privacy-modal {
+  max-width: 600px;
+  width: calc(100% - 40px);
+  border: none;
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: var(--shadow-lg);
+}
+
+.privacy-modal::backdrop {
+  background: rgba(2, 10, 24, 0.62);
+  backdrop-filter: blur(3px);
+}
+
+.privacy-modal h3 {
+  font-size: 21px;
+  margin-bottom: 14px;
+  padding-right: 40px;
+}
+
+.privacy-modal p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+
+.privacy-modal p + p {
+  margin-top: 10px;
+}
+
+.privacy-modal__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: #f6f9fe;
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+@media (max-width: 860px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

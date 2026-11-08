@@ -1,0 +1,140 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: var(--line);
+  box-shadow: 0 4px 20px rgba(11, 36, 71, 0.06);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+.logo__badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: var(--grad-primary);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.header__nav {
+  display: flex;
+  gap: 2px;
+}
+
+.header__nav a {
+  padding: 9px 13px;
+  border-radius: 11px;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.header__nav a:hover {
+  color: var(--primary);
+  background: #eef4fe;
+}
+
+.header__nav a.is-active {
+  color: var(--primary);
+  background: #e8f0fe;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__burger {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  place-items: center;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  z-index: 49;
+  display: grid;
+  gap: 4px;
+  padding: 12px 20px 22px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  animation: menuIn 0.3s ease both;
+}
+
+.mobile-menu a:not(.btn) {
+  padding: 13px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.mobile-menu a:not(.btn):hover {
+  background: #f1f6ff;
+}
+
+.mobile-menu .btn {
+  margin-top: 8px;
+}
+
+@media (max-width: 960px) {
+  .header__nav,
+  .header__actions .btn {
+    display: none;
+  }
+
+  .header__burger {
+    display: grid;
+  }
+}

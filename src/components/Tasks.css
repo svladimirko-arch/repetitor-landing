@@ -1,0 +1,73 @@
+/* заголовок блока + тетрадь с делением слева от него, на одном уровне */
+.tasks__head-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(12px, 2vw, 32px);
+}
+
+.tasks__division {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 760px) {
+  .tasks__head-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* на мобильных анимационные тетради скрыты */
+  .tasks__division {
+    display: none;
+  }
+}
+
+.tasks__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.task-card {
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: #d3e2fa;
+}
+
+.task-card h3 {
+  font-size: 17.5px;
+  line-height: 1.3;
+}
+
+.task-card p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+@media (max-width: 1023px) {
+  .tasks__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .tasks__grid {
+    grid-template-columns: 1fr;
+  }
+}

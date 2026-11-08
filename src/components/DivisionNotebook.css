@@ -1,0 +1,118 @@
+/* ============================================================================
+   Блок-переход «тетрадь с делением столбиком» между первым экраном и «Задачами».
+   Анимация привязана к прокрутке (scroll-scrub): компонент выставляет на листе
+   переменную --p (0…1) из положения листа в окне, каждый элемент проявляется
+   в своём окне прогресса через --s (начало) и --k (локальный 0…1).
+   Скролл остановился — все элементы замерли на текущем кадре.
+   ========================================================================== */
+
+.division__outer {
+  width: 350px;
+  height: 310px;
+  /* лист прижат к левой части экрана; уменьшен под единый ритм страницы */
+  zoom: 0.72;
+}
+
+.division__wrap {
+  position: relative;
+  width: 344px;
+  height: 292px;
+}
+
+/* лист: края мягко растворяются в фоне (без жёсткой рамки) */
+.division__sheet {
+  position: absolute;
+  inset: 0;
+  background: #fdfdfe;
+  transform: rotate(-2.5deg);
+  mask-image: radial-gradient(ellipse 105% 105% at 50% 48%, #000 52%, rgba(0, 0, 0, 0.4) 76%, transparent 97%);
+  -webkit-mask-image: radial-gradient(ellipse 105% 105% at 50% 48%, #000 52%, rgba(0, 0, 0, 0.4) 76%, transparent 97%);
+}
+
+/* тетрадные клеточки: проявляются в начале прокрутки */
+.division__sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(96, 140, 205, 0.4) 1.2px, transparent 1.2px),
+    linear-gradient(90deg, rgba(96, 140, 205, 0.4) 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
+  background-position: 20px 12px;
+  opacity: clamp(0, calc(var(--p, 0) / 0.14), 1);
+}
+
+/* общий принцип: локальный прогресс --k из окна [ --s, --s + --dur ] */
+.div-el {
+  position: absolute;
+  --k: clamp(0, calc((var(--p, 0) - var(--s, 0)) / var(--dur, 0.045)), 1);
+  opacity: var(--k);
+}
+
+/* цифры: строго по клетке, чуть крупнее, слегка «дописываются» снизу */
+.div-num {
+  font-family: 'Caveat', 'Comic Sans MS', 'Segoe Print', cursive;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  color: #1e4fb8;
+  text-align: center;
+  transform: translateY(calc((1 - var(--k)) * 7px));
+}
+
+.div-rule {
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(30, 79, 184, 0.8);
+  transform: scaleX(var(--k));
+  transform-origin: left center;
+  --dur: 0.04;
+}
+
+/* вертикальная черта прочерчивается сверху вниз */
+.div-bar {
+  width: 3px;
+  border-radius: 3px;
+  background: rgba(30, 79, 184, 0.85);
+  height: calc(262px * var(--k));
+  --dur: 0.06;
+}
+
+/* «рукописная» обводка частного — дорисовывается в самом конце прокрутки */
+.div-circle {
+  position: absolute;
+  --dur: 0.045;
+  --k: clamp(0, calc((var(--p, 0) - var(--s, 0)) / var(--dur)), 1);
+  stroke-dasharray: 230;
+  stroke-dashoffset: calc(230 * (1 - var(--k)));
+}
+
+/* карандаш следует за записью по мере прокрутки */
+.div-pencil {
+  position: absolute;
+  left: 168px;
+  top: calc(-4px + var(--pk, 0) * 250px);
+  transform: rotate(38deg);
+  z-index: 2;
+  --pk: clamp(0, calc((var(--p, 0) - 0.06) / 0.88), 1);
+  opacity: clamp(0, calc(min(var(--pk) * 10, (1 - var(--pk)) * 10, 1)), 1);
+  filter: drop-shadow(0 3px 6px rgba(11, 36, 71, 0.25));
+}
+
+/* при отключённой анимации — лист виден сразу целиком */
+@media (prefers-reduced-motion: reduce) {
+  .div-el,
+  .div-circle {
+    opacity: 1 !important;
+    --k: 1 !important;
+    transform: none !important;
+  }
+
+  .division__sheet::before {
+    opacity: 1 !important;
+  }
+
+  .div-pencil {
+    display: none !important;
+  }
+}
